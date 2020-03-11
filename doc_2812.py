@@ -108,18 +108,16 @@ if __name__=="__main__":
             write2812(spi, [[0,0,i]]*nLED)
             time.sleep(0.003)
         time.sleep(1)
-		
         for i in range(254, 0, -1):
             write2812(spi, [[0,0,i]]*nLED)
             time.sleep(0.003)
 
-    def test2():
+    def left_to_right():
         for i in range(0, LEDs/2):
             matrix[i]=[0,0,254]
             write2812(spi, matrix)
             time.sleep(delay)
         time.sleep(1)
-		
         for i in range(LEDs/2+1, LEDs):
             matrix[i]=[0,0,254]
             matrix[i-LEDs/2]=[0,0,0]
@@ -127,9 +125,9 @@ if __name__=="__main__":
             time.sleep(delay)
 
     def breath():
-        delay_s = (5 / 255.0) 
-        min_intensity = 50
+        min_intensity = 100
         max_intensity = 180
+        delay_s = (5.0 / (max_intensity-min_intensity)) 
         for i in range(min_intensity, max_intensity):
             write2812(spi, [[i,i,i]]*nLED)
             time.sleep(delay_s)
@@ -156,6 +154,8 @@ if __name__=="__main__":
     try:
         while True:
             breath()
+            left_to_right()
+            test1()
     # breath()
     # breath()
 
