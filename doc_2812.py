@@ -155,10 +155,10 @@ if __name__=="__main__":
     print ("Press CTRL+C to exit")
     try:
         while True:
-        breath()
+            breath()
     # breath()
     # breath()
-    
+
     except KeyboardInterrupt:
         print ("Goodbye.")
 
