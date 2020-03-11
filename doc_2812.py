@@ -136,7 +136,21 @@ if __name__=="__main__":
             write2812(spi, [[i,i,i]]*nLED)
             time.sleep(delay_s)
         time.sleep(1)
-            
+
+    def breath_night():
+        min_intensity = 0
+        max_intensity = 30
+        delay_s = (5.0 / nLED) 
+        for i in range(0, nLED-1):
+            matrix[i]=[max_intensity,max_intensity,max_intensity]
+            write2812(spi, matrix)
+            time.sleep(delay_s)
+        time.sleep(1)
+        for i in range(0, nLED-1):
+            matrix[i]=[min_intensity,min_intensity,min_intensity]
+            write2812(spi, matrix)
+            time.sleep(delay_s)
+        time.sleep(1)
     try:
         opts, args = getopt.getopt(sys.argv[1:], "hn:c:t", ["help", "color=", "test"])
     except getopt.GetoptError as err:
@@ -153,9 +167,11 @@ if __name__=="__main__":
     print ("Press CTRL+C to exit")
     try:
         while True:
-            breath()
-            left_to_right()
-            test1()
+            breath_night()
+            # breath()
+            # left_to_right()
+            # test1()
+
     # breath()
     # breath()
 
