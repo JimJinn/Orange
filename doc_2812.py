@@ -127,13 +127,13 @@ if __name__=="__main__":
             time.sleep(delay)
 
     def breath():
-        delay_s = (2 / 255.0) 
-        min_intensity = 0
-        max_intensity = 255
+        delay_s = (5 / 255.0) 
+        min_intensity = 50
+        max_intensity = 180
         for i in range(min_intensity, max_intensity):
             write2812(spi, [[i,i,i]]*nLED)
             time.sleep(delay_s)
-        time.sleep(0.7)
+        time.sleep(1)
         for i in range(max_intensity, min_intensity,-1):
             write2812(spi, [[i,i,i]]*nLED)
             time.sleep(delay_s)
@@ -152,10 +152,16 @@ if __name__=="__main__":
     spi = spidev.SpiDev()
     spi.open(1,0)
 
-    breath()
-    breath()
-    breath()
+    print ("Press CTRL+C to exit")
+    try:
+        while True:
+        breath()
+    # breath()
+    # breath()
     
+    except KeyboardInterrupt:
+        print ("Goodbye.")
+
     #test_off(spi,32)
     #time.sleep(1)
 
