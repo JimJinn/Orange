@@ -20,7 +20,6 @@ pir = port.PA10
 gpio.init()
 
 """Set directions"""
-gpio.setcfg(led, gpio.OUTPUT)
 gpio.setcfg(pir, gpio.INPUT)
 
 """Enable pullup resistor"""
@@ -35,9 +34,6 @@ try:
         if (old != state):
             print(state)
             old = state
-
-        """Since we use pull-up the logic will be inverted"""
-        #gpio.output(led, not state)
 
 except KeyboardInterrupt:
     print ("Goodbye.")
