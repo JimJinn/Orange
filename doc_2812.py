@@ -99,13 +99,12 @@ if __name__=="__main__":
         write2812(spi, [[10,0,0], [0,10,0], [0,0,10],
                         [0,10,10], [10,0,10], [10,10,0],
                         [0,0,0], [10,10,10]])
-    def test_off(spi, nLED=32):
+    def test_off(spi, nLED=LEDs):
         #switch all nLED chips OFF.
         write2812(spi, [[0,0,0]]*nLED)
     
-    def test1(nLED=16):
+    def test1(nLED=LEDs):
         for i in range(0, 254):
-            write2812(spi, [[0,0,i]]*nLED)
             write2812(spi, [[0,0,i]]*nLED)
             time.sleep(0.003)
         time.sleep(1)
@@ -128,13 +127,13 @@ if __name__=="__main__":
             time.sleep(delay)
 
     def breath():
-        delay_s = (5 / 255.0) 
-        min_intensity = 30
-        max_intensity = 220
+        delay_s = (2 / 255.0) 
+        min_intensity = 0
+        max_intensity = 255
         for i in range(min_intensity, max_intensity):
             write2812(spi, [[i,i,i]]*nLED)
             time.sleep(delay_s)
-        time.sleep(1)
+        time.sleep(0.7)
         for i in range(max_intensity, min_intensity,-1):
             write2812(spi, [[i,i,i]]*nLED)
             time.sleep(delay_s)
