@@ -140,15 +140,13 @@ if __name__=="__main__":
     def breath_night():
         min_intensity = 0
         max_intensity = 30
-        delay_s = (5.0 / nLED) 
-        for i in range(0, nLED-1):
-            matrix[i]=[max_intensity,max_intensity,max_intensity]
-            write2812(spi, matrix)
+        delay_s = (15.0 / (max_intensity-min_intensity)) 
+        for i in range(min_intensity, max_intensity):
+            write2812(spi, [[i,i,i]]*nLED)
             time.sleep(delay_s)
         time.sleep(1)
-        for i in range(0, nLED-1):
-            matrix[i]=[min_intensity,min_intensity,min_intensity]
-            write2812(spi, matrix)
+        for i in range(max_intensity, min_intensity,-1):
+            write2812(spi, [[i,i,i]]*nLED)
             time.sleep(delay_s)
         time.sleep(1)
     try:
